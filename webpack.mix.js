@@ -9,6 +9,9 @@ mix.webpackConfig({
     }
 })
 
+require('laravel-mix-tailwind')
+require('laravel-mix-purgecss')
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -20,7 +23,11 @@ mix.webpackConfig({
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').sourceMaps()
+mix.js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css')
+    .tailwind('./tailwind.config.js')
+    .purgeCss()
+    .sourceMaps()
 
 if (mix.inProduction()) {
     mix.version()
